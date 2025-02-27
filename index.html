@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2196f3">
+    <title>PWA Notepad</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+</head>
+<body>
+    <header>
+        <h1>PWA Notepad</h1>
+        <div id="status-indicator">Online</div>
+    </header>
+    
+    <main>
+        <div class="note-container">
+            <div class="note-form">
+                <h2>Nova Nota</h2>
+                <input type="text" id="note-title" placeholder="Título" required>
+                <textarea id="note-content" placeholder="Digite sua nota..." required></textarea>
+                <button id="save-note">Salvar</button>
+            </div>
+            
+            <div class="notes-list">
+                <h2>Minhas Notas</h2>
+                <div id="notes-container">
+                    <!-- As notas serão inseridas aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>PWA Notepad - Exemplo para curso de PWA</p>
+    </footer>
+
+    <div id="install-banner" class="hidden">
+        <p>Instale este app no seu dispositivo!</p>
+        <div>
+            <button id="install-button">Instalar</button>
+            <button id="dismiss-button">Agora não</button>
+        </div>
+    </div>
+    
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Registrando o Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registrado!', reg))
+                    .catch(err => console.log('Erro ao registrar Service Worker:', err));
+            });
+        }
+    </script>
+</body>
+</html>
